@@ -1,9 +1,6 @@
-import React from "react"
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
   Outlet,
 } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
