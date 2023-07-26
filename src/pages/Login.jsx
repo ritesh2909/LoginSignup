@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [error, setError] = useState(null);
@@ -8,6 +9,9 @@ function Login() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -15,8 +19,9 @@ function Login() {
         email: data.email,
         password: data.password,
       });
-
-      console.log(res.data);
+      setLoggedIn(true);
+      localStorage.setItem("loggedIn", true);
+      navigate("/");
     } catch (error) {
       console.log(error);
       setError(error.response.data);
@@ -47,7 +52,7 @@ function Login() {
           value={data.password}
         />
         <button type="submit">Login</button>
-        {error && <p>{error + '!'}</p>} 
+        {error && <p>{error + "!"}</p>}
         <span>
           Don't have an account <Link to={"/register"}>SignUp Now</Link>{" "}
         </span>

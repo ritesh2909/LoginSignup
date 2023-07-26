@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Register() {
   const [data, setData] = useState({
@@ -8,7 +10,7 @@ function Register() {
     username: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -19,8 +21,11 @@ function Register() {
         email: data.email,
         password: data.password,
       });
-      console.log(res);
+      if (res) {
+        navigate("/login");
+      }
     } catch (error) {
+      console.log(error);
       setError(error.response.data);
     }
   };
@@ -56,7 +61,7 @@ function Register() {
           onChange={handleChange}
         />
         <button type="submit">Regiter</button>
-       {error && <p>{error + '!'}</p>}
+        {error && <p>{error + "!"}</p>}
 
         <span>
           Already have an Account <Link to={"/login"}>Login</Link>{" "}
