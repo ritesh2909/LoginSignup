@@ -9,7 +9,7 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/post/posts/").then((response) => {
+    axios.get("https://weary-fawn-coveralls.cyclic.app/api/post/posts/").then((response) => {
       setPosts(response.data);
     });
   }, []);
